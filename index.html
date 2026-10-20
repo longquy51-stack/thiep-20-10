@@ -22,9 +22,9 @@
             100% { transform: translateY(-10vh) rotate(360deg) scale(1.5); opacity: 0; }
         }
         .floating-img {
-            position: absolute; width: 80px; height: 80px; object-fit: cover;
-            border-radius: 12px; border: 3px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15); pointer-events: none; z-index: 1;
+            position: absolute; width: 85px; height: 85px; object-fit: cover;
+            border-radius: 12px; border: 3px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2); pointer-events: none; z-index: 1;
             opacity: 0; display: none;
         }
         @keyframes imgFly {
@@ -50,17 +50,22 @@
             0%, 100% { transform: translateY(0) scale(1); }
             50% { transform: translateY(-10px) scale(1.05); }
         }
+        
+        /* KHUNG CHỮ XUYÊN THẤU 100% - KHÔNG CHE NỀN */
         .card {
-            background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px); border: 2px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.02); /* Gần như trong suốt hoàn toàn */
+            backdrop-filter: none; /* Bỏ hẳn hiệu ứng blur gây che khuất nền phía sau */
+            -webkit-backdrop-filter: none;
+            border: 2px solid rgba(255, 255, 255, 0.4); /* Giữ đường viền mảnh lung linh */
             padding: 40px 30px; border-radius: 24px; text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2); max-width: 90%; width: 420px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); max-width: 90%; width: 420px;
             color: #fff; z-index: 10; display: none;
         }
+        
         .card.show { display: block; opacity: 1; transform: scale(1); animation: cardIn 0.8s ease-out; }
         @keyframes cardIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
-        h1 { font-size: 2.3rem; margin-bottom: 20px; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); font-weight: 800; }
-        p { font-size: 1.15rem; line-height: 1.8; text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); font-weight: 500; min-height: 120px; }
+        h1 { font-size: 2.3rem; margin-bottom: 20px; text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4); font-weight: 800; }
+        p { font-size: 1.15rem; line-height: 1.8; text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4); font-weight: 500; min-height: 120px; }
         .cursor { display: inline-block; width: 3px; background-color: #fff; margin-left: 4px; animation: blink 0.8s infinite; }
         @keyframes blink { 50% { background-color: transparent; } }
         .heart { font-size: 3rem; color: #ff3366; margin-top: 20px; animation: beat 0.8s infinite alternate; text-shadow: 0 0 10px rgba(255, 51, 102, 0.8); opacity: 0; transition: opacity 1s ease; }
@@ -78,8 +83,8 @@
 </head>
 <body>
     <div class="welcome-screen" id="welcomeScreen">
-        <h2 style="color: #fff; margin-bottom: 30px; font-size: 1.8rem; text-shadow: 0 2px 5px rgba(0,0,0,0.2); text-align: center; padding: 0 10px;">CK BẠN YÊU BẠN ĐẾN KHI NÀO...🎁</h2>
-        <button class="open-btn" onclick="openCard()">Hãy Mở Thiệp Ra Xem 💌</button>
+        <h2 style="color: #fff; margin-bottom: 30px; font-size: 1.8rem; text-shadow: 0 2px 5px rgba(0,0,0,0.2); text-align: center; padding: 0 10px;">Bạn có 1 món quà bất ngờ...🎁</h2>
+        <button class="open-btn" onclick="openCard()">Mở Thiệp Ra Xem 💌</button>
     </div>
     <div class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</div>
     <audio id="bgMusic" loop preload="auto"><source src="nhac.mp3" type="audio/mpeg"></audio>
@@ -111,7 +116,10 @@
         const card = document.getElementById('mainCard');
         const btn = document.getElementById('musicBtn');
         const heart = document.getElementById('heartIcon');
+        
+        // Bạn có thể viết lại chính xác câu chúc dài của mình vào đây thay cho câu mẫu này nhé
         const loiChucText = "Chúc người phụ nữ tuyệt vời đang quét mã này luôn luôn rạng rỡ, hạnh phúc, xinh đẹp tựa như những đóa hoa hướng dương rực rỡ nhất dưới ánh mặt trời! Chúc tình yêu 💖 một ngày 20/10 thật trọn vẹn và ý nghĩa nhé! Yêu em , Thương em ==> 2 công chúa💖 Công chúa lớn và công chúa nhỏ của Anh==> mãi mãi và mãi mãi💖 💖 💖";
+        
         let index = 0;
         function openCard() {
             music.play().then(() => { btn.style.display = 'flex'; }).catch(e => console.log(e));
